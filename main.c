@@ -10,10 +10,12 @@ int main() {
 
     do {
         // Menampilkan pilihan login
+         printf("---SELAMAT DATANG---\n");
         printf("Login Sebagai:\n");
         printf("1. Admin\n");
         printf("2. Member\n");
-        printf("Pilih (1/2): ");
+        printf("3. Tambah Member\n");  // Opsi baru
+        printf("Pilih (1/2/3): ");
         scanf("%d", &pilihanLogin);
 
         if (pilihanLogin == 1) {
@@ -36,6 +38,9 @@ int main() {
                 printf("Login member gagal.\n");
             }
             break;  // Keluar dari loop setelah login berhasil
+        } else if (pilihanLogin == 3) {
+            // Tambah Member
+            tambahMember();  // Memanggil fungsi untuk menambah member
         } else {
             printf("Pilihan tidak valid. Silakan coba lagi.\n");
         }
