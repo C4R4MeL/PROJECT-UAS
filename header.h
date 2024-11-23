@@ -49,5 +49,8 @@ void pembayaran();           // Proses pembayaran dan diskon
 void beriDiskon();           // Menetapkan diskon untuk member
 void laporanPenjualan();     // Melihat laporan penjualan
 int login();                 // Fungsi login untuk admin
+int loginAdmin();
+int loginMember(char idMember[]);
+
 
 #endif
