@@ -2,3 +2,4 @@ username password
 caramel orangbaik
 sage naspad
 admin3 password3
+farid faridaja
