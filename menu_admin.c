@@ -13,6 +13,7 @@ void menuAdmin() {
         printf("4. Tambah Stok Barang\n");
         printf("5. Kurangi Stok Barang\n");
         printf("6. Kategorikan Produk\n");
+        printf("7. Laporan Penjualan\n");  // Opsi untuk laporan penjualan
         printf("0. Keluar\n");
         printf("Pilihan: ");
         scanf("%d", &pilihan);
@@ -37,6 +38,9 @@ void menuAdmin() {
             case 6:
                 kategorikanBarang();
                 break;
+            case 7:
+                laporanPenjualan();  // Menampilkan laporan penjualan
+                break;
             case 0:
                 printf("Keluar dari menu admin.\n");
                 break;
@@ -44,10 +48,4 @@ void menuAdmin() {
                 printf("Pilihan tidak valid.\n");
         }
     } while (pilihan != 0);
-}
-
-int main() {
-    // Menjalankan menu admin
-    menuAdmin();
-    return 0;
 }
