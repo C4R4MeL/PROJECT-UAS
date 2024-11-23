@@ -1,18 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-// Struktur Data untuk Barang
-typedef struct {
-    char id[10];       // ID Barang
-    char nama[50];     // Nama Barang
-    char kategori[30]; // Kategori Barang
-    int stok;          // Stok Barang
-    float harga;       // Harga Barang
-} Barang;
-
-// Nama file untuk menyimpan data barang
-#define FILE_BARANG "barang.txt"
+#include "header.h"
 
 // Fungsi untuk Menambah Barang
 void tambahBarang() {
