@@ -24,10 +24,11 @@ void pembayaran() {
         return;
     }
 
+    // Input ID Member
     printf("Masukkan ID Member (kosongkan jika tidak ada): ");
     scanf("%s", idMember);
 
-    // Jika member terdaftar, periksa diskon
+    // Jika ID Member tidak kosong, periksa apakah member terdaftar dan berikan diskon
     if (strlen(idMember) > 0) {
         FILE *fileMember = fopen(FILE_MEMBER, "r");
         if (fileMember == NULL) {
@@ -39,7 +40,7 @@ void pembayaran() {
 
         while (fscanf(fileMember, "%s %s %d\n", member.id, member.nama, &member.poin) != EOF) {
             if (strcmp(idMember, member.id) == 0) {
-                diskon = 10; // Misalnya member dapat diskon 10%
+                diskon = 10; // Misalnya member mendapatkan diskon 10%
                 printf("Member ditemukan. Diskon: %.2f%%\n", diskon);
                 ditemukan = 1;
                 break;
@@ -103,7 +104,18 @@ void pembayaran() {
 
         fprintf(fileTransaksi, "%s|%s|%.2f|%.2f|%s\n", transaksi.id, transaksi.tanggal, transaksi.totalBayar, transaksi.diskon, transaksi.idMember);
 
-        printf("Pembayaran berhasil! Total yang harus dibayar: %.2f\n", totalSetelahDiskon);
+        printf("Total yang harus dibayar: %.2f\n", totalSetelahDiskon);
+
+        // Pembayaran
+        float uangDibayar;
+        printf("Masukkan uang yang dibayar: ");
+        scanf("%f", &uangDibayar);
+
+        if (uangDibayar >= totalSetelahDiskon) {
+            printf("Pembayaran berhasil! Kembalian: %.2f\n", uangDibayar - totalSetelahDiskon);
+        } else {
+            printf("Uang yang dibayar kurang.\n");
+        }
     } else {
         printf("Tidak ada barang yang dibeli.\n");
     }
@@ -111,3 +123,4 @@ void pembayaran() {
     fclose(fileBarang);
     fclose(fileTransaksi);
 }
+
