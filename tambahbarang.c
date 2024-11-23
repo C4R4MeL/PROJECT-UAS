@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "header.h"
 
 // Fungsi untuk Menambah Barang
@@ -28,3 +31,4 @@ void tambahBarang() {
 
     printf("Barang berhasil ditambahkan!\n");
 }
+
