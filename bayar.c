@@ -65,7 +65,7 @@ void pembayaran() {
                 barangDitemukan = 1;
                 printf("Nama Barang: %s\n", barang.nama);
                 printf("Harga: %.2f\n", barang.harga);
-                printf("Stok tersedia: %d\n");
+                printf("Stok tersedia: %d\n", barang.stok);
 
                 // Masukkan jumlah barang yang ingin dibeli
                 printf("Masukkan jumlah: ");
