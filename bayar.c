@@ -24,30 +24,39 @@ void pembayaran() {
         return;
     }
 
-    // Input ID Member
-    printf("Masukkan ID Member (kosongkan jika tidak ada): ");
-    scanf("%s", idMember);
+// Input ID Member
+printf("Masukkan ID Member (kosongkan jika tidak ada): ");
+scanf("%9s", idMember); // Batasi panjang input ID member untuk menghindari overflow
 
-    // Jika ID Member tidak kosong, periksa apakah member terdaftar dan berikan diskon
-    if (strlen(idMember) > 0) {
-        FILE *fileMember = fopen(FILE_MEMBER, "r");
-        if (fileMember == NULL) {
-            printf("File member.txt tidak ditemukan.\n");
-            fclose(fileBarang);
-            fclose(fileTransaksi);
-            return;
-        }
-
-        while (fscanf(fileMember, "%s %s %d\n", member.id, member.nama, &member.poin) != EOF) {
-            if (strcmp(idMember, member.id) == 0) {
-                diskon = 10; // Misalnya member mendapatkan diskon 10%
-                printf("Member ditemukan. Diskon: %.2f%%\n", diskon);
-                ditemukan = 1;
-                break;
-            }
-        }
-        fclose(fileMember);
+// Jika ID Member tidak kosong, periksa apakah member terdaftar dan berikan diskon
+if (strlen(idMember) > 0) {
+    FILE *fileMember = fopen(FILE_MEMBER, "r");
+    if (fileMember == NULL) {
+        printf("File member.txt tidak ditemukan.\n");
+        fclose(fileBarang); // Pastikan fileBarang ditutup sebelum keluar
+        fclose(fileTransaksi); // Pastikan fileTransaksi ditutup sebelum keluar
+        return;
     }
+
+    int ditemukan = 0; // Menyimpan status apakah member ditemukan atau tidak
+    while (fscanf(fileMember, "%s %s %d\n", member.id, member.nama, &member.poin) != EOF) {
+        if (strcmp(idMember, member.id) == 0) {
+            diskon = 10; // Misalnya member mendapatkan diskon 10%
+            printf("Member ditemukan. Diskon: %.2f%%\n", diskon);
+            ditemukan = 1;
+            break; // Jika ditemukan, keluar dari loop
+        }
+    }
+
+    fclose(fileMember);
+
+    if (!ditemukan) {
+        printf("ID Member tidak ditemukan. Tidak ada diskon yang diterapkan.\n");
+    }
+} else {
+    printf("ID Member tidak dimasukkan, tidak ada diskon yang diterapkan.\n");
+}
+
 
     // Proses pembelian barang
     while (1) {
@@ -123,4 +132,3 @@ void pembayaran() {
     fclose(fileBarang);
     fclose(fileTransaksi);
 }
-
