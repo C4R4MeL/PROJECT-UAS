@@ -1,46 +1,48 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "header.h"
 
-// Struktur Data Barang
-typedef struct {
-    char id[10];
-    char nama[50];
-    char kategori[30];
-    int stok;
-    float harga;
-} Barang;
-
-// Fungsi untuk menampilkan barang berdasarkan kategori
+// Fungsi untuk mengkategorikan ulang barang
 void kategorikanBarang() {
-    char kategoriCari[30];
-    FILE *file = fopen("barang.txt", "r");
+    char idBarang[10];
+    char kategoriBaru[30];
+    int ditemukan = 0;
     Barang barang;
 
-    if (file == NULL) {
-        printf("File barang.txt tidak ditemukan.\n");
+    // Membuka file barang.txt untuk dibaca dan temp.txt untuk menulis data sementara
+    FILE *file = fopen(FILE_BARANG, "r+");
+    FILE *temp = fopen("temp.txt", "w");
+
+    if (file == NULL || temp == NULL) {
+        printf("File tidak dapat dibuka.\n");
         return;
     }
 
-    printf("Masukkan kategori yang ingin dicari: ");
-    scanf("%s", kategoriCari);
+    // Input ID Barang yang ingin dikategorikan ulang
+    printf("Masukkan ID Barang: ");
+    scanf("%s", idBarang);
+    printf("Masukkan kategori baru: ");
+    scanf("%s", kategoriBaru);
 
-    printf("ID\tNama\t\tKategori\tHarga\tStok\n");
-    printf("---------------------------------------------------\n");
-
-    // Mencari dan menampilkan barang yang sesuai dengan kategori
-    int ditemukan = 0;
+    // Membaca data barang dan mengubah kategori jika ditemukan
     while (fscanf(file, "%[^|]|%[^|]|%[^|]|%f|%d\n", barang.id, barang.nama, barang.kategori, &barang.harga, &barang.stok) != EOF) {
-        if (strcmp(barang.kategori, kategoriCari) == 0) {
-            printf("%s\t%s\t%s\t\t%.2f\t%d\n", barang.id, barang.nama, barang.kategori, barang.harga, barang.stok);
+        if (strcmp(barang.id, idBarang) == 0) {
+            // Jika ID Barang ditemukan, ubah kategori
+            strcpy(barang.kategori, kategoriBaru);
             ditemukan = 1;
+            printf("Kategori barang %s berhasil diubah menjadi: %s\n", barang.nama, barang.kategori);
         }
-    }
-
-    if (!ditemukan) {
-        printf("Tidak ada barang dengan kategori \"%s\".\n", kategoriCari);
+        // Menulis kembali data ke file sementara
+        fprintf(temp, "%s|%s|%s|%.2f|%d\n", barang.id, barang.nama, barang.kategori, barang.harga, barang.stok);
     }
 
     fclose(file);
-}
+    fclose(temp);
 
+    // Jika barang ditemukan, ganti file barang.txt dengan file sementara
+    if (ditemukan) {
+        remove(FILE_BARANG);  // Hapus file lama
+        rename("temp.txt", FILE_BARANG);  // Ganti file sementara dengan nama file asli
+    } else {
+        printf("Barang dengan ID tersebut tidak ditemukan.\n");
+        remove("temp.txt");  // Hapus file sementara jika tidak ditemukan
+    }
+}
