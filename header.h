@@ -46,7 +46,6 @@ void kategorikanBarang();    // Mengkategorikan barang
 void tambahMember();         // Menambahkan member baru
 void tambahPoinMember();     // Menambah poin member
 void pembayaran();           // Proses pembayaran dan diskon
-void beriDiskon();           // Menetapkan diskon untuk member
 void laporanPenjualan();     // Melihat laporan penjualan
 int login();                 // Fungsi login untuk admin
 int loginAdmin();
