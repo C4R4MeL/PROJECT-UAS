@@ -28,10 +28,3 @@ void tambahBarang() {
 
     printf("Barang berhasil ditambahkan!\n");
 }
-
-// Fungsi Utama (untuk testing)
-int main() {
-    printf("--- Tambah Barang ---\n");
-    tambahBarang();
-    return 0;
-}
