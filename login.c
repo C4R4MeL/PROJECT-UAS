@@ -52,7 +52,7 @@ int loginMember(char *idMember) {
     while (fscanf(file, "%s %s %d", id, nama, &poin) != EOF) {
         if (strcmp(id, idMember) == 0) {
             fclose(file);
-            printf("Login member berhasil. Selamat datang, %s!\n", nama);
+            printf("Login member berhasil. Selamat datang, %s!\n", nama); // Menambahkan nama member saat login berhasil
             return 1; // Login berhasil
         }
     }
