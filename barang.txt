@@ -1,2 +1,2 @@
-B002|Buku|ATK|5000.00|32
-B003|Pensil|alat|1000.00|10
+23|dompet|alat|23000.00|7
+24|lampu|alataja|14000.00|9
