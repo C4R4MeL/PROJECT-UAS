@@ -1,20 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "header.h"
 
-// *** Konstanta ***
-#define FILE_BARANG "barang.txt"
-
-// *** Struktur Data ***
-typedef struct {
-    char id[10];
-    char nama[50];
-    char kategori[30];
-    int stok;
-    float harga;
-} Barang;
-
-// *** Fungsi untuk Menghapus Barang ***
+// Fungsi untuk Menghapus Barang
 void hapusBarang() {
     char idBarang[10];
     FILE *file = fopen(FILE_BARANG, "r");
@@ -27,12 +13,14 @@ void hapusBarang() {
         return;
     }
 
+    // Input ID Barang yang akan dihapus
     printf("Masukkan ID Barang yang ingin dihapus: ");
     scanf("%s", idBarang);
 
+    // Membaca data barang dari file dan menyalin ke file sementara kecuali barang yang akan dihapus
     while (fscanf(file, "%[^|]|%[^|]|%[^|]|%f|%d\n", barang.id, barang.nama, barang.kategori, &barang.harga, &barang.stok) != EOF) {
         if (strcmp(barang.id, idBarang) == 0) {
-            ditemukan = 1; // Barang ditemukan dan dilewati (tidak ditulis ke temp.txt)
+            ditemukan = 1; // Jika ID ditemukan, tidak menyalin barang ke file sementara
         } else {
             fprintf(temp, "%s|%s|%s|%.2f|%d\n", barang.id, barang.nama, barang.kategori, barang.harga, barang.stok);
         }
@@ -41,20 +29,13 @@ void hapusBarang() {
     fclose(file);
     fclose(temp);
 
-    // Ganti file asli dengan file sementara
-    remove(FILE_BARANG);
-    rename("temp.txt", FILE_BARANG);
-
+    // Jika barang ditemukan, ganti file asli dengan file sementara
     if (ditemukan) {
+        remove(FILE_BARANG);       // Menghapus file asli
+        rename("temp.txt", FILE_BARANG); // Menamai ulang file sementara menjadi file asli
         printf("Barang berhasil dihapus.\n");
     } else {
         printf("Barang dengan ID tersebut tidak ditemukan.\n");
+        remove("temp.txt");  // Menghapus file sementara jika barang tidak ditemukan
     }
-}
-
-// *** Fungsi Utama untuk Pengujian ***
-int main() {
-    printf("Hapus Barang dari File\n");
-    hapusBarang();
-    return 0;
 }
