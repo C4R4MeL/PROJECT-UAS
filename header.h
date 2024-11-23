@@ -51,6 +51,8 @@ void laporanPenjualan();     // Melihat laporan penjualan
 int login();                 // Fungsi login untuk admin
 int loginAdmin();
 int loginMember(char idMember[]);
+float beriDiskon(Member member, float totalBayar);
+
 
 
 #endif
