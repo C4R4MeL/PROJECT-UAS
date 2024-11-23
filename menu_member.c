@@ -1,25 +1,5 @@
 #include "header.h"
 
-// Fungsi untuk melihat daftar barang
-void lihatDaftarBarang() {
-    FILE *file = fopen(FILE_BARANG, "r");
-    Barang barang;
-
-    if (file == NULL) {
-        printf("File barang.txt tidak ditemukan.\n");
-        return;
-    }
-
-    printf("ID\tNama\t\tKategori\tHarga\tStok\n");
-    printf("---------------------------------------------------\n");
-
-    while (fscanf(file, "%[^|]|%[^|]|%[^|]|%f|%d\n", barang.id, barang.nama, barang.kategori, &barang.harga, &barang.stok) != EOF) {
-        printf("%s\t%s\t%s\t\t%.2f\t%d\n", barang.id, barang.nama, barang.kategori, barang.harga, barang.stok);
-    }
-
-    fclose(file);
-}
-
 // Fungsi untuk membeli barang
 void beliBarang() {
     char idBarang[10];
