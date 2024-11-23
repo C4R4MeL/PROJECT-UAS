@@ -24,8 +24,3 @@ void tambahMember() {
     printf("Member berhasil ditambahkan!\n");
 }
 
-int main() {
-    // Memanggil fungsi untuk menambah member
-    tambahMember();
-    return 0;
-}
