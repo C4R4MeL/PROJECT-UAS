@@ -1,0 +1,3 @@
+A001|zeta|100
+A002|arab|0
+id_member3|nama_member3|50
