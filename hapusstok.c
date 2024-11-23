@@ -1,26 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "header.h"
 
-// *** Konstanta ***
-#define FILE_BARANG "barang.txt"
-
-// *** Struktur Data ***
-typedef struct {
-    char id[10];
-    char nama[50];
-    char kategori[30];
-    int stok;
-    float harga;
-} Barang;
-
-// *** Fungsi untuk Mengurangi Stok Barang ***
+// Fungsi untuk Mengurangi Stok Barang
 void kurangiStok() {
     char idBarang[10];
-    int jumlahKurang, ditemukan = 0;
+    int stokKurang;
+    int ditemukan = 0;
     Barang barang;
 
-    FILE *file = fopen(FILE_BARANG, "r");
+    // Membuka file barang.txt untuk dibaca dan ditulis
+    FILE *file = fopen(FILE_BARANG, "r+");
     FILE *temp = fopen("temp.txt", "w");
 
     if (file == NULL || temp == NULL) {
@@ -28,34 +16,36 @@ void kurangiStok() {
         return;
     }
 
-    printf("Masukkan ID Barang yang ingin dikurangi stoknya: ");
+    // Input ID Barang dan jumlah stok yang ingin dikurangi
+    printf("Masukkan ID Barang: ");
     scanf("%s", idBarang);
     printf("Masukkan jumlah stok yang ingin dikurangi: ");
-    scanf("%d", &jumlahKurang);
+    scanf("%d", &stokKurang);
 
+    // Membaca data dari file barang.txt dan melakukan pengecekan serta pengurangan stok
     while (fscanf(file, "%[^|]|%[^|]|%[^|]|%f|%d\n", barang.id, barang.nama, barang.kategori, &barang.harga, &barang.stok) != EOF) {
         if (strcmp(barang.id, idBarang) == 0) {
-            ditemukan = 1;
-            if (barang.stok >= jumlahKurang) {
-                barang.stok -= jumlahKurang;
-                printf("Stok barang berhasil dikurangi. Stok baru: %d\n", barang.stok);
+            if (barang.stok >= stokKurang) {
+                barang.stok -= stokKurang;  // Mengurangi stok barang
+                ditemukan = 1;
+                printf("Stok barang %s berhasil dikurangi. Stok sekarang: %d\n", barang.nama, barang.stok);
             } else {
-                printf("Stok tidak mencukupi untuk dikurangi.\n");
+                printf("Stok barang tidak cukup untuk dikurangi.\n");
             }
         }
-        // Menulis kembali data barang ke file sementara
+        // Menulis kembali data ke file sementara
         fprintf(temp, "%s|%s|%s|%.2f|%d\n", barang.id, barang.nama, barang.kategori, barang.harga, barang.stok);
     }
 
     fclose(file);
     fclose(temp);
 
-    // Mengganti file asli dengan file sementara
-    remove(FILE_BARANG);
-    rename("temp.txt", FILE_BARANG);
-
-    if (!ditemukan) {
+    // Jika barang ditemukan, ganti file lama dengan file baru
+    if (ditemukan) {
+        remove(FILE_BARANG);         // Menghapus file lama
+        rename("temp.txt", FILE_BARANG);  // Menamai file sementara sebagai file utama
+    } else {
         printf("Barang dengan ID tersebut tidak ditemukan.\n");
+        remove("temp.txt");  // Menghapus file sementara jika barang tidak ditemukan
     }
 }
-
