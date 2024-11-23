@@ -1,0 +1,1 @@
+gcc -o program bayar.c daftarbarang.c diskon.c hapusbarang.c header.h kategori.c laporan.c login.c main.c menu_admin.c menu_member.c poinmember.c tambahbarang.c tambahmember.c tambahstok.c hapusstok.c
