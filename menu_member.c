@@ -1,6 +1,12 @@
-// Fungsi utama untuk menu member
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "header.h"
+
 void menuMember() {
     int pilihan;
+    char lanjutBeli;
+    float totalBelanja = 0.0f;  // Inisialisasi total belanja
 
     do {
         printf("\n--- Menu Member ---\n");
@@ -16,7 +22,7 @@ void menuMember() {
                 lihatDaftarBarang();
                 break;
             case 2:
-                beliBarang();
+                 pembayaran();  
                 break;
             case 0:
                 printf("Keluar dari menu member.\n");
