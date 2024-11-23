@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "header.h"
 
 // Fungsi untuk melihat daftar barang
@@ -21,4 +24,3 @@ void lihatDaftarBarang() {
 
     fclose(file);
 }
-
