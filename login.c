@@ -1,15 +1,10 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "header.h"
 
-// *** Konstanta ***
-#define FILE_ADMIN "admin.txt"
-#define FILE_MEMBER "member.txt"
-
-// *** Fungsi untuk Login Admin ***
+// Fungsi untuk Login Admin
 int loginAdmin() {
     char username[50], password[50], uname[50], pass[50];
     FILE *file = fopen(FILE_ADMIN, "r");
+
     if (file == NULL) {
         printf("File admin.txt tidak ditemukan.\n");
         return 0;
@@ -21,6 +16,7 @@ int loginAdmin() {
     printf("Password: ");
     scanf("%s", password);
 
+    // Mencari username dan password yang cocok dalam file admin.txt
     while (fscanf(file, "%s %s", uname, pass) != EOF) {
         if (strcmp(username, uname) == 0 && strcmp(password, pass) == 0) {
             fclose(file);
@@ -34,7 +30,7 @@ int loginAdmin() {
     return 0; // Login gagal
 }
 
-// *** Fungsi untuk Login Member ***
+// Fungsi untuk Login Member
 int loginMember(char *idMember) {
     char id[10], nama[50];
     int poin;
@@ -47,8 +43,9 @@ int loginMember(char *idMember) {
 
     printf("=== Login Member ===\n");
     printf("ID Member: ");
-    scanf("%s", idMember);
+    scanf("%s", idMember); // Mengambil ID Member yang dimasukkan
 
+    // Mencari ID Member yang cocok dalam file member.txt
     while (fscanf(file, "%s %s %d", id, nama, &poin) != EOF) {
         if (strcmp(id, idMember) == 0) {
             fclose(file);
