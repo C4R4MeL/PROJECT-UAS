@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "header.h"
 
 // Fungsi untuk menambah member
@@ -23,4 +26,3 @@ void tambahMember() {
 
     printf("Member berhasil ditambahkan!\n");
 }
-
