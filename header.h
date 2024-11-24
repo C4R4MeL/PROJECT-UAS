@@ -53,6 +53,7 @@ int loginAdmin();
 int loginMember(char idMember[]);
 void menuAdmin();
 void menuMember();
+int tambahPoin(int jumlahBayar, int poinSekarang);
 
 
 
