@@ -1,7 +1,9 @@
-ID useranme poin
-A001 zeta 100
+ID useranme 10
+poin A001 11798536
+zeta zeta 560
 A002 arab 0
 11 fufufafa 0
-id_member3 nama_member3 50
+id_member3nama_member3 nama_member3 50
 A005 fifel 0
 11 fufufafa 0
+apa sasa 0
