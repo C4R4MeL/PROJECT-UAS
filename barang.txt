@@ -1,2 +1,3 @@
-23|dompet|alat|23000.00|7
+23|dompet|alat|23000.00|2
 24|lampu|alataja|14000.00|9
+25|sendal|alat|13000.00|9
